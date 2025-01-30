@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horse Racing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #raceTrack {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+        .horse {
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            transition: left 1s linear;
+        }
+    </style>
+</head>
+<body>
+    <h1>Horse Racing Game</h1>
+    <div id="raceTrack">
+        <img src="horse1.png" class="horse" id="horse1" style="top: 20px;">
+        <img src="horse2.png" class="horse" id="horse2" style="top: 80px;">
+    </div>
+    <button onclick="startRace()">Start Race</button>
+    <button onclick="trainHorse()">Train Horse</button>
+    <button onclick="breedHorse()">Breed Horse</button>
+    <p id="result"></p>
+    <script>
+        let horses = [
+            { name: "Arabian", speed: 10 },
+            { name: "Thoroughbred", speed: 12 }
+        ];
+        
+        function startRace() {
+            let horse1Speed = horses[0].speed + Math.random() * 5;
+            let horse2Speed = horses[1].speed + Math.random() * 5;
+            
+            document.getElementById("horse1").style.left = horse1Speed * 50 + "px";
+            document.getElementById("horse2").style.left = horse2Speed * 50 + "px";
+            
+            setTimeout(() => {
+                document.getElementById("result").innerText =
+                    horse1Speed > horse2Speed ? "Arabian Wins!" : "Thoroughbred Wins!";
+            }, 1000);
+        }
+        
+        function trainHorse() {
+            horses[0].speed += 1;
+            horses[1].speed += 1;
+            alert("Horses have been trained! Speed increased.");
+        }
+        
+        function breedHorse() {
+            let newSpeed = (horses[0].speed + horses[1].speed) / 2 + 1;
+            horses.push({ name: "New Breed", speed: newSpeed });
+            alert("New horse bred with speed: " + newSpeed);
+        }
+    </script>
+</body>
+</html>
